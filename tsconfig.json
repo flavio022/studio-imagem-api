@@ -17,6 +17,15 @@
       ],
       "@utils/*": [
         "utils/*"
+      ],
+      "@errors/*": [
+        "errors/*"
+      ],
+      "@routes/*": [
+        "routes/*"
+      ],
+      "@middlewares/*": [
+        "middlewares/*"
       ]
     },
     "esModuleInterop": true,

@@ -7,6 +7,7 @@ import { AppError } from "../../../../errors/AppError";
 
 interface IRequest {
     category: string;
+    company: string;
     image: string;
     user_email: string;
 }
@@ -21,15 +22,14 @@ class CreateProjectUseCase {
         private storageProvider: IStorageProvider
     ) { }
 
-    async execute({ category, image, user_email }: IRequest): Promise<void> {
+    async execute({ category, company, image, user_email }: IRequest): Promise<void> {
         const user = await this.userRepository.findByEmail(user_email);
         if (!user) {
             throw new AppError("User does not exist!", 401);
         }
         await this.storageProvider.saveFile(image, "projects");
         image = `${process.env.AWS_BUCKET_URL}/${image}`;
-        console.log(image);
-        await this.projectRepository.create({ category, image, user_email })
+        await this.projectRepository.create({ category, company, image, user_email })
     }
 }
 

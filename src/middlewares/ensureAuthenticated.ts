@@ -19,7 +19,6 @@ export async function ensureAuthetnticated(
     }
 
     const [, token] = authHeader.split(" ");
-    console.log(token);
     try {
         const { sub: user_id } = verify(token, "7ddd68e771c61f836eb6de453185c505") as IPayLoad;
         const userRepository = new UserRepository();

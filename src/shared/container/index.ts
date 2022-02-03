@@ -9,6 +9,16 @@ import { IStorageProvider } from "../../shared/container/providers/StorageProvid
 import { LocalStorageProvider } from "../../shared/container/providers/StorageProvider/implementations/LocalStorageProvider";
 import { S3StorageProvider } from "../../shared/container/providers/StorageProvider/implementations/S3StorageProvider";
 
+import { ICategoryRepository } from "../../modules/categories/repositories/ICategoryRepository";
+import { CategoryRepository } from "../../modules/categories/repositories/implementations/CategoryRepository";
+
+
+
+container.registerSingleton<ICategoryRepository>(
+    "CategoryRepository",
+    CategoryRepository
+)
+
 container.registerSingleton<IUserRepository>(
     "UserRepository",
     UserRepository
@@ -17,6 +27,11 @@ container.registerSingleton<IUserRepository>(
 container.registerSingleton<IProjectRepository>(
     "ProjectRepository",
     ProjectRepository
+)
+
+container.registerSingleton<IStorageProvider>(
+    "StorageProvider",
+    S3StorageProvider
 )
 
 container.registerSingleton<IStorageProvider>(

@@ -1,9 +1,9 @@
-import { Project } from '../../entities/Project';
+import { Project } from "../../entities/Project";
 import { inject, injectable } from 'tsyringe';
 import { IProjectRepository } from '../../repositories/IProjectRepository';
-
+import { AppError } from "../../../../errors/AppError";
 @injectable()
-class ListUserProjectsUseCase {
+class ListProjectsByEmailUseCase {
     constructor(
         @inject("ProjectRepository")
         private projectRepository: IProjectRepository
@@ -13,9 +13,11 @@ class ListUserProjectsUseCase {
 
     async execute({ email }): Promise<Project[]> {
         const projects = await this.projectRepository.listByUserEmail(email);
-
+        if (!projects) {
+            throw new AppError("User does not found!", 401);
+        }
         return projects;
     }
 }
 
-export { ListUserProjectsUseCase }
+export { ListProjectsByEmailUseCase }

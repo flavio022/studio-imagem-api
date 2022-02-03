@@ -9,6 +9,9 @@ class Project {
     id?: string;
 
     @Column()
+    company: string;
+
+    @Column()
     category: string;
 
     @Column()
