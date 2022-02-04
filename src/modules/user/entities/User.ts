@@ -13,6 +13,12 @@ class User {
     email: string;
 
     @Column()
+    address: string;
+
+    @Column()
+    company: string;
+
+    @Column()
     password: string;
 
     @Column()

@@ -16,9 +16,11 @@ class UserRepository implements IUserRepository {
     }
 
 
-    async create({ name, email, password }: ICreateUserDTO): Promise<void> {
+    async create({ name, company, address, email, password }: ICreateUserDTO): Promise<void> {
         const category = this.repository.create({
             name,
+            company,
+            address,
             email,
             password
         });

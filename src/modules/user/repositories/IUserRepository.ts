@@ -2,6 +2,8 @@ import { User } from '../entities/User'
 
 interface ICreateUserDTO {
     name: string;
+    company: string;
+    address: string;
     email: string;
     password: string;
 }
