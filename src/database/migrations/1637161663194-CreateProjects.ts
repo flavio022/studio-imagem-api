@@ -14,10 +14,6 @@ export class CreateProjects1637161663194 implements MigrationInterface {
 
                     },
                     {
-                        name: "company",
-                        type: "varchar"
-                    },
-                    {
                         name: "category",
                         type: "varchar"
                     },

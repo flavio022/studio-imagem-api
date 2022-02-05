@@ -34,11 +34,10 @@ class ProjectRepository implements IProjectRepository {
     }
 
 
-    async create({ category, company, image, user_email }: ICreateProjectDto): Promise<void> {
+    async create({ category, image, user_email }: ICreateProjectDto): Promise<void> {
         const specification = this.projectRepository.create(
             {
                 category,
-                company,
                 image,
                 user_email
             }
