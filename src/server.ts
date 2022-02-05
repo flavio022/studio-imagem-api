@@ -6,8 +6,6 @@ import { router } from './routes';
 import 'dotenv/config';
 import cors from 'cors';
 import * as Sentry from "@sentry/node";
-import * as Tracing from "@sentry/tracing";
-
 import { handlingErrors } from "./middlewares/handlingErrors";
 
 const app = express();
