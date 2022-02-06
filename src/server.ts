@@ -5,18 +5,15 @@ import "./shared/container";
 import { router } from './routes';
 import 'dotenv/config';
 import cors from 'cors';
-import * as Sentry from "@sentry/node";
-import * as Tracing from "@sentry/tracing";
 
 import { handlingErrors } from "./middlewares/handlingErrors";
 
 const app = express();
 app.use(cors());
-app.use(Sentry.Handlers.requestHandler());
-app.use(Sentry.Handlers.tracingHandler());
+
 app.use(express.json());
 app.use(router);
 app.use(handlingErrors);
 
-const port = process.env.PORT || 3331;
+const port = process.env.PORT || 3333;
 app.listen(port, () => console.log("Server is running!", port));
