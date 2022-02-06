@@ -10,6 +10,8 @@ import { handlingErrors } from "./middlewares/handlingErrors";
 
 
 const app = express();
+app.use(Sentry.Handlers.requestHandler());
+app.use(Sentry.Handlers.tracingHandler());
 app.use(express.json());
 app.use(cors());
 
