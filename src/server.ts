@@ -5,6 +5,7 @@ import "./shared/container";
 import { router } from './routes';
 import 'dotenv/config';
 import cors from 'cors';
+import * as Sentry from "@sentry/node";
 import { handlingErrors } from "./middlewares/handlingErrors";
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use(router);
+app.use(Sentry.Handlers.errorHandler());
 
 app.use(handlingErrors);
 
