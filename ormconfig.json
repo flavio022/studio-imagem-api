@@ -2,15 +2,15 @@
     "type": "postgres",
     "url": "postgres://xtauquohetpeca:f39b344a058861ee727fc14d2ce71e29b526547a64c9925cce0c0310ddafe0ee@ec2-3-227-154-49.compute-1.amazonaws.com:5432/dd3kjktgjknm1n",
     "migrations": [
-        "./src/database/migrations/*.ts"
+        "./dist/database/migrations/*.js"
     ],
-    "entities": [
-        "./src/modules/**/entities/*.ts"
-    ],
-    "cli": {
-        "migrationsDir": "./src/database/migrations"
-    },
     "ssl": {
         "rejectUnauthorized": false
+    },
+    "entities": [
+        "./dist/modules/**/entities/*.js"
+    ],
+    "cli": {
+        "migrationsDir": "./dist/database/migrations"
     }
 }
