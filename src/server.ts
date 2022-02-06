@@ -17,3 +17,6 @@ app.use(router);
 app.use(Sentry.Handlers.errorHandler());
 
 app.use(handlingErrors);
+
+const port = process.env.PORT || 3333;
+app.listen(port, () => console.log("Server is running!", port));
