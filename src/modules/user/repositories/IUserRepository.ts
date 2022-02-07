@@ -13,7 +13,7 @@ interface IUserRepository {
     findById(id: string): Promise<User>;
     list(): Promise<User[]>;
     create({ name, email, password }: ICreateUserDTO): Promise<void>;
-
+    delete(id: string): Promise<void>;
 }
 
 

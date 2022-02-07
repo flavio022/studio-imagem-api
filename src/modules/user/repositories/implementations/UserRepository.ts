@@ -1,3 +1,4 @@
+import { AppError } from "errors/AppError";
 import { getRepository, Repository } from "typeorm";
 import { User } from "../../entities/User";
 import { IUserRepository, ICreateUserDTO } from "../IUserRepository";
@@ -8,6 +9,14 @@ class UserRepository implements IUserRepository {
 
     constructor() {
         this.repository = getRepository(User);
+    }
+    async delete(id: string): Promise<void> {
+        const user = this.findById(id);
+        if (!user) {
+            throw new AppError("User does not exists!", 401);
+        }
+        await this.repository.delete(id);
+
     }
     async findById(id: string): Promise<User> {
         const user = await this.repository.findOne(id);
