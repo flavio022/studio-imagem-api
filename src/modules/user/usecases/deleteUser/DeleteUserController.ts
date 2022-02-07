@@ -5,8 +5,8 @@ import { DeleteUserUseCase } from "./DeleteUserUseCase";
 class DeleteUserContoller {
     async handle(request: Request, response: Response) {
         const { id } = request.params;
-        const listProjectsUseCase = container.resolve(DeleteUserUseCase);
-        listProjectsUseCase.execute(id);
+        const delteUserUseCase = container.resolve(DeleteUserUseCase);
+        delteUserUseCase.execute(id);
         return response.status(201).send();
     }
 }

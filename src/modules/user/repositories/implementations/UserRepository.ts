@@ -1,4 +1,4 @@
-import { AppError } from "errors/AppError";
+import { AppError } from "../../../../errors/AppError";
 import { getRepository, Repository } from "typeorm";
 import { User } from "../../entities/User";
 import { IUserRepository, ICreateUserDTO } from "../IUserRepository";

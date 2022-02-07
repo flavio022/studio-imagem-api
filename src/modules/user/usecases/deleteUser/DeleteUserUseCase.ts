@@ -12,7 +12,6 @@ class DeleteUserUseCase {
     }
 
     async execute(id: string): Promise<void> {
-        console.log(id);
         await this.userRepository.delete(id);
     }
 }

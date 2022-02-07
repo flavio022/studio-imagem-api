@@ -15,6 +15,6 @@ userRoutes.post("/", createUserController.handle);
 userRoutes.use(ensureAuthetnticated);
 
 userRoutes.get("/", listUserController.handle);
-userRoutes.delete("/", delteUserController.handle);
+userRoutes.delete("/:id", delteUserController.handle);
 
 export { userRoutes };
