@@ -6,9 +6,13 @@ class ListProjectsByEmailController {
     async handle(request: Request, response: Response): Promise<Response> {
 
         const { email } = request.headers;
+        const { category } = request.query;
+        console.log(category);
         const createCategoryUseCase = container.resolve(ListProjectsByEmailUseCase);
-
-        const projects = await createCategoryUseCase.execute({ email });
+        if (category === undefined) {
+            console.log("vazio")
+        }
+        const projects = await createCategoryUseCase.execute({ email, category });
 
 
         return response.json(projects);

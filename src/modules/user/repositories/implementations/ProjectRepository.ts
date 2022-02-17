@@ -10,6 +10,7 @@ class ProjectRepository implements IProjectRepository {
     constructor() {
         this.projectRepository = getRepository(Project);
     }
+
     async delete(id: string): Promise<void> {
         const project = await this.projectRepository.findOne(id);
         if (!project) {
@@ -18,18 +19,35 @@ class ProjectRepository implements IProjectRepository {
         await this.projectRepository.delete(id);
     }
 
-    async listAllProjects(): Promise<Project[]> {
-        const projects = await this.projectRepository.find();
-
+    async listAllProjects(category: string): Promise<Project[]> {
+        var projects = null;
+        if (category != undefined) {
+            projects = await this.projectRepository.find({
+                where: category
+            });
+        } else {
+            projects = await this.projectRepository.find();
+        }
         return projects;
     }
-    async listByUserEmail(user_email: string): Promise<Project[]> {
-        const project = await this.projectRepository.find({
-            where:
-            {
-                user_email: user_email
-            }
-        });
+
+    async listByUserEmail(user_email: string, category: string): Promise<Project[]> {
+        var project = null;
+        if (category === undefined) {
+            project = await this.projectRepository.find({
+                where:
+                {
+                    user_email: user_email
+                }
+            });
+        } else {
+            project = await this.projectRepository.find({
+                where: {
+                    user_email: user_email,
+                    category: category
+                }
+            })
+        }
         return project;
     }
 

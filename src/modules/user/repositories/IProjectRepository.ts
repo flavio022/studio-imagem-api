@@ -9,8 +9,8 @@ interface ICreateProjectDto {
 
 interface IProjectRepository {
     create({ category, image, user_email }: ICreateProjectDto): Promise<void>;
-    listByUserEmail(user_email: string): Promise<Project[]>;
-    listAllProjects(): Promise<IProjectDto[]>;
+    listByUserEmail(user_email: string, category: string): Promise<Project[]>;
+    listAllProjects(category: string): Promise<IProjectDto[]>;
     delete(id: string): Promise<void>;
 }
 

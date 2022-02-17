@@ -6,8 +6,8 @@ import { ListProjectsUseCase } from "./ListProjectsUseCase";
 class ListProjectsController {
     async handle(request: Request, response: Response) {
         const listProjectsUseCase = container.resolve(ListProjectsUseCase);
-
-        const projects = await listProjectsUseCase.execute();
+        const category = request.query;
+        const projects = await listProjectsUseCase.execute(category);
 
         return response.json(projects);
     }
