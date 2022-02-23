@@ -17,6 +17,9 @@ class Project {
     @Column()
     user_email: string;
 
+    @Column()
+    isPrivate?: boolean;
+
     @CreateDateColumn()
     created_at: Date;
 
@@ -36,6 +39,7 @@ class Project {
         if (!this.id) {
             this.id = uuidV4();
         }
+        this.isPrivate = this.isPrivate;
     }
 }
 

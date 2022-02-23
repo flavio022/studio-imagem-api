@@ -9,6 +9,7 @@ interface IRequest {
     category: string;
     image: string;
     user_email: string;
+    isPrivate: boolean;
 }
 @injectable()
 class CreateProjectUseCase {
@@ -21,14 +22,14 @@ class CreateProjectUseCase {
         private storageProvider: IStorageProvider
     ) { }
 
-    async execute({ category, image, user_email }: IRequest): Promise<void> {
+    async execute({ category, image, user_email, isPrivate }: IRequest): Promise<void> {
         const user = await this.userRepository.findByEmail(user_email);
         if (!user) {
             throw new AppError("User does not exist!", 401);
         }
         await this.storageProvider.saveFile(image, "projects");
         image = `${process.env.AWS_BUCKET_URL}/${image}`;
-        await this.projectRepository.create({ category, image, user_email })
+        await this.projectRepository.create({ category, image, user_email, isPrivate })
     }
 }
 

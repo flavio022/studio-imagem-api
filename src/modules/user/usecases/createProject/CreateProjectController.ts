@@ -6,11 +6,18 @@ class CreateProjectController {
 
 
     async handler(request: Request, response: Response): Promise<Response> {
-        const { category, user_email } = request.body;
+        let { category, user_email, isPrivate } = request.body;
+
+        if (isPrivate === 'true') {
+            isPrivate = true;
+        } else {
+            isPrivate = false;
+        }
+
         const image = request.file.filename;
         const createProjectUseCase = container.resolve(CreateProjectUseCase);
 
-        await createProjectUseCase.execute({ category, image, user_email });
+        await createProjectUseCase.execute({ category, image, user_email, isPrivate });
 
         return response.status(201).send();
     }

@@ -21,12 +21,23 @@ class ProjectRepository implements IProjectRepository {
 
     async listAllProjects(category: string): Promise<Project[]> {
         var projects = null;
-        if (category != undefined) {
+        console.log(category)
+        if (category !== undefined) {
+            console.log("private udnie")
+
             projects = await this.projectRepository.find({
-                where: category
+                where: {
+                    category,
+                    isPrivate: false
+                }
             });
         } else {
-            projects = await this.projectRepository.find();
+            console.log("private flase")
+            projects = await this.projectRepository.find({
+                where: {
+                    isPrivate: false
+                },
+            });
         }
         return projects;
     }
@@ -50,14 +61,36 @@ class ProjectRepository implements IProjectRepository {
         }
         return project;
     }
+    async listUserProjects(user_email: string, category: string): Promise<Project[]> {
+        var project = null;
+        if (category === undefined) {
+            project = await this.projectRepository.find({
+                where:
+                {
+                    user_email: user_email,
+                    isPrivate: true
+                }
+            });
+        } else {
+            project = await this.projectRepository.find({
+                where: {
+                    user_email: user_email,
+                    category: category,
+                    isPrivate: true
+                }
+            })
+        }
+        return project;
+    }
 
-
-    async create({ category, image, user_email }: ICreateProjectDto): Promise<void> {
+    async create({ category, image, user_email, isPrivate }: ICreateProjectDto): Promise<void> {
+        console.log(isPrivate)
         const specification = this.projectRepository.create(
             {
                 category,
                 image,
-                user_email
+                user_email,
+                isPrivate
             }
         )
         await this.projectRepository.save(specification);

@@ -26,7 +26,10 @@ export class CreateProjects1637161663194 implements MigrationInterface {
                         name: "user_email",
                         type: "varchar"
                     },
-
+                    {
+                        name: "isPrivate",
+                        type: "boolean"
+                    },
                     {
                         name: "created_at",
                         type: "timestamp",
