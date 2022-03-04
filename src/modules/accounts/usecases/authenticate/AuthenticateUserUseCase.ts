@@ -4,19 +4,6 @@ import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import { AppError } from "../../../../errors/AppError";
 
-interface IRequest {
-    email: string;
-    password: string;
-}
-
-interface IResponse {
-    user: {
-        name: string,
-        email: string
-    };
-    token: string
-}
-
 
 interface IRequest {
     email: string;
@@ -26,7 +13,8 @@ interface IRequest {
 interface IResponse {
     user: {
         name: string,
-        email: string
+        email: string,
+        isAdmin: boolean
     };
     token: string
 }
@@ -51,7 +39,9 @@ class AuthenticateUserUseCase {
         if (!passwordMatch) {
             throw new AppError("password incorrect!", 401);
         }
-
+        if (!user.isActiveted) {
+            throw new AppError("This user is disable!", 401);
+        }
         const token = sign({}, "7ddd68e771c61f836eb6de453185c505", {
             subject: user.id,
             expiresIn: "1d"
@@ -62,7 +52,8 @@ class AuthenticateUserUseCase {
             token,
             user: {
                 name: user.name,
-                email: user.email
+                email: user.email,
+                isAdmin: user.isAdmin
             }
         }
         return tokenReturn;

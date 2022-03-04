@@ -1,7 +1,7 @@
 import { AppError } from "../../../../errors/AppError";
 import { getRepository, Repository } from "typeorm";
 import { User } from "../../entities/User";
-import { IUserRepository, ICreateUserDTO } from "../IUserRepository";
+import { IUserRepository, ICreateUserDTO, IActiveUserDTO, ISetAdminDTO } from "../IUserRepository";
 
 class UserRepository implements IUserRepository {
 
@@ -10,10 +10,33 @@ class UserRepository implements IUserRepository {
     constructor() {
         this.repository = getRepository(User);
     }
+
+    async enableUser({ email, isActive }: IActiveUserDTO): Promise<void> {
+        const user = await this.repository.findOne({
+            email
+        })
+        if (!user) {
+            throw new AppError("User not found!", 401);
+        }
+        user.isActiveted = isActive;
+        await this.repository.save(user);
+    }
+
+    async setAdmin({ email, isAdmin }: ISetAdminDTO): Promise<void> {
+        const user = await this.repository.findOne({
+            email
+        })
+        if (!user) {
+            throw new AppError("User not found!", 401);
+        }
+        user.isAdmin = isAdmin;
+        await this.repository.save(user);
+    }
+
     async delete(id: string): Promise<void> {
         const user = this.findById(id);
         if (!user) {
-            throw new AppError("User does not exists!", 401);
+            throw new AppError("User not found!", 401);
         }
         await this.repository.delete(id);
 
@@ -26,7 +49,7 @@ class UserRepository implements IUserRepository {
 
 
     async create({ name, company, address, email, password }: ICreateUserDTO): Promise<void> {
-        const category = this.repository.create({
+        const user = this.repository.create({
             name,
             company,
             address,
@@ -34,19 +57,19 @@ class UserRepository implements IUserRepository {
             password
         });
 
-        await this.repository.save(category);
+        await this.repository.save(user);
     }
 
     async list(): Promise<User[]> {
-        const categories = await this.repository.find();
-        return categories;
+        const users = await this.repository.find();
+        return users;
     }
 
     async findByEmail(email: string): Promise<User> {
-        const category = await this.repository.findOne({
+        const user = await this.repository.findOne({
             email
         });
-        return category;
+        return user;
     }
 }
 
