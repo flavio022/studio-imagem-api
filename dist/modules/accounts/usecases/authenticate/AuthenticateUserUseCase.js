@@ -40,6 +40,10 @@ let AuthenticateUserUseCase = (_dec = (0, _tsyringe.injectable)(), _dec2 = funct
       throw new _AppError.AppError("password incorrect!", 401);
     }
 
+    if (!user.isActiveted) {
+      throw new _AppError.AppError("This user is disable!", 401);
+    }
+
     const token = (0, _jsonwebtoken.sign)({}, "7ddd68e771c61f836eb6de453185c505", {
       subject: user.id,
       expiresIn: "1d"
@@ -49,7 +53,8 @@ let AuthenticateUserUseCase = (_dec = (0, _tsyringe.injectable)(), _dec2 = funct
       token,
       user: {
         name: user.name,
-        email: user.email
+        email: user.email,
+        isAdmin: user.isAdmin
       }
     };
     return tokenReturn;

@@ -39,6 +39,10 @@ class CreateUsers1635213053570 {
         type: "boolean",
         default: false
       }, {
+        name: "isActiveted",
+        type: "boolean",
+        default: true
+      }, {
         name: "created_at",
         type: "timestamp",
         default: "now()"

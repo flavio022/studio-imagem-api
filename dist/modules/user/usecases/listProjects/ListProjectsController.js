@@ -15,7 +15,10 @@ let ListProjectsController = (_dec = (0, _tsyringe.injectable)(), _dec(_class = 
   async handle(request, response) {
     const listProjectsUseCase = _tsyringe.container.resolve(_ListProjectsUseCase.ListProjectsUseCase);
 
-    const projects = await listProjectsUseCase.execute();
+    const {
+      category
+    } = request.query;
+    const projects = await listProjectsUseCase.execute(category);
     return response.json(projects);
   }
 

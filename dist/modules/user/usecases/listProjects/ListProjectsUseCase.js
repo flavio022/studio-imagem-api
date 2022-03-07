@@ -18,8 +18,8 @@ let ListProjectsUseCase = (_dec = (0, _tsyringe.injectable)(), _dec2 = function 
     this.projectRepository = projectRepository;
   }
 
-  async execute() {
-    const projects = await this.projectRepository.listAllProjects();
+  async execute(category) {
+    const projects = await this.projectRepository.listAllProjects(category);
     return projects;
   }
 

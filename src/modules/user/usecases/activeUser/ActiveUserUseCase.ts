@@ -3,7 +3,7 @@ import { IUserRepository } from '../../repositories/IUserRepository';
 
 interface IRequest {
     email: string;
-    isActive: boolean;
+    isActiveted: boolean;
 }
 
 @injectable()
@@ -16,9 +16,9 @@ class ActiveUserUseCase {
     }
 
     async execute({
-        email, isActive
+        email, isActiveted
     }: IRequest): Promise<void> {
-        await this.userRepository.enableUser({ email, isActive });
+        await this.userRepository.enableUser({ email, isActiveted });
     }
 }
 

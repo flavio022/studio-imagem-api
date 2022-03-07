@@ -11,12 +11,16 @@ var _tsyringe = require("tsyringe");
 
 class ListUserProjectsController {
   async handle(request, response) {
+    const {
+      category
+    } = request.query;
     const email = request.user.email;
 
     const createCategoryUseCase = _tsyringe.container.resolve(_ListUserProjectsUseCase.ListUserProjectsUseCase);
 
     const projects = await createCategoryUseCase.execute({
-      email
+      email,
+      category
     });
     return response.json(projects);
   }

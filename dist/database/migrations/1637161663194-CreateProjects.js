@@ -25,6 +25,9 @@ class CreateProjects1637161663194 {
         name: "user_email",
         type: "varchar"
       }, {
+        name: "isPrivate",
+        type: "boolean"
+      }, {
         name: "created_at",
         type: "timestamp",
         default: "now()"

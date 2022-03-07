@@ -45,7 +45,7 @@ export class CreateUsers1635213053570 implements MigrationInterface {
                     {
                         name: "isActiveted",
                         type: "boolean",
-                        default: true
+                        default: false
                     },
                     {
                         name: "created_at",

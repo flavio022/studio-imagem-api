@@ -11,10 +11,18 @@ var _tsyringe = require("tsyringe");
 
 class CreateProjectController {
   async handler(request, response) {
-    const {
+    let {
       category,
-      user_email
+      user_email,
+      isPrivate
     } = request.body;
+
+    if (isPrivate === 'true') {
+      isPrivate = true;
+    } else {
+      isPrivate = false;
+    }
+
     const image = request.file.filename;
 
     const createProjectUseCase = _tsyringe.container.resolve(_CreateProjectUseCase.CreateProjectUseCase);
@@ -22,7 +30,8 @@ class CreateProjectController {
     await createProjectUseCase.execute({
       category,
       image,
-      user_email
+      user_email,
+      isPrivate
     });
     return response.status(201).send();
   }

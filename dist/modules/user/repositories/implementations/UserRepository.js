@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.UserRepository = void 0;
 
+var _AppError = require("../../../../errors/AppError");
+
 var _typeorm = require("typeorm");
 
 var _User = require("../../entities/User");
@@ -13,6 +15,48 @@ class UserRepository {
   constructor() {
     this.repository = void 0;
     this.repository = (0, _typeorm.getRepository)(_User.User);
+  }
+
+  async enableUser({
+    email,
+    isActive
+  }) {
+    const user = await this.repository.findOne({
+      email
+    });
+
+    if (!user) {
+      throw new _AppError.AppError("User not found!", 401);
+    }
+
+    user.isActiveted = isActive;
+    await this.repository.save(user);
+  }
+
+  async setAdmin({
+    email,
+    isAdmin
+  }) {
+    const user = await this.repository.findOne({
+      email
+    });
+
+    if (!user) {
+      throw new _AppError.AppError("User not found!", 401);
+    }
+
+    user.isAdmin = isAdmin;
+    await this.repository.save(user);
+  }
+
+  async delete(id) {
+    const user = this.findById(id);
+
+    if (!user) {
+      throw new _AppError.AppError("User not found!", 401);
+    }
+
+    await this.repository.delete(id);
   }
 
   async findById(id) {
@@ -27,26 +71,26 @@ class UserRepository {
     email,
     password
   }) {
-    const category = this.repository.create({
+    const user = this.repository.create({
       name,
       company,
       address,
       email,
       password
     });
-    await this.repository.save(category);
+    await this.repository.save(user);
   }
 
   async list() {
-    const categories = await this.repository.find();
-    return categories;
+    const users = await this.repository.find();
+    return users;
   }
 
   async findByEmail(email) {
-    const category = await this.repository.findOne({
+    const user = await this.repository.findOne({
       email
     });
-    return category;
+    return user;
   }
 
 }

@@ -17,12 +17,13 @@ const activeUserController = new ActiveUserController();
 
 userRoutes.post("/", createUserController.handle);
 
+userRoutes.put("/enableUser", activeUserController.handle);
+
 userRoutes.use(ensureAuthetnticated);
 
 userRoutes.get("/", listUserController.handle);
 userRoutes.delete("/:id", delteUserController.handle);
 
 userRoutes.put("/admin", setAdminController.handle);
-userRoutes.put("/enableUser", activeUserController.handle);
 
 export { userRoutes };

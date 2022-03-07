@@ -14,11 +14,20 @@ class ListProjectsByEmailController {
     const {
       email
     } = request.headers;
+    const {
+      category
+    } = request.query;
+    console.log(category);
 
     const createCategoryUseCase = _tsyringe.container.resolve(_ListProjectsByEmailUseCase.ListProjectsByEmailUseCase);
 
+    if (category === undefined) {
+      console.log("vazio");
+    }
+
     const projects = await createCategoryUseCase.execute({
-      email
+      email,
+      category
     });
     return response.json(projects);
   }

@@ -11,14 +11,14 @@ class UserRepository implements IUserRepository {
         this.repository = getRepository(User);
     }
 
-    async enableUser({ email, isActive }: IActiveUserDTO): Promise<void> {
+    async enableUser({ email, isActiveted }: IActiveUserDTO): Promise<void> {
         const user = await this.repository.findOne({
             email
         })
         if (!user) {
             throw new AppError("User not found!", 401);
         }
-        user.isActiveted = isActive;
+        user.isActiveted = isActiveted;
         await this.repository.save(user);
     }
 

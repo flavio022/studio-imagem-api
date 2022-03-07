@@ -21,7 +21,6 @@ class ProjectRepository implements IProjectRepository {
 
     async listAllProjects(category: string): Promise<Project[]> {
         var projects = null;
-        console.log(category)
         if (category !== undefined) {
             console.log("private udnie")
 

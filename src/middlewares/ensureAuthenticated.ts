@@ -29,7 +29,8 @@ export async function ensureAuthetnticated(
         }
         request.user = {
             id: user.id,
-            email: user.email
+            email: user.email,
+            isAdmin: user.isAdmin
         };
 
         next();

@@ -19,9 +19,10 @@ let ListUserProjectsUseCase = (_dec = (0, _tsyringe.injectable)(), _dec2 = funct
   }
 
   async execute({
-    email
+    email,
+    category
   }) {
-    const projects = await this.projectRepository.listByUserEmail(email);
+    const projects = await this.projectRepository.listUserProjects(email, category);
     return projects;
   }
 

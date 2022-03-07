@@ -21,9 +21,10 @@ let ListProjectsByEmailUseCase = (_dec = (0, _tsyringe.injectable)(), _dec2 = fu
   }
 
   async execute({
-    email
+    email,
+    category
   }) {
-    const projects = await this.projectRepository.listByUserEmail(email);
+    const projects = await this.projectRepository.listByUserEmail(email, category);
 
     if (!projects) {
       throw new _AppError.AppError("User does not found!", 401);

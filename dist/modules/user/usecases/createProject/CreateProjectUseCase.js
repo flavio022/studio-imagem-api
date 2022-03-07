@@ -33,7 +33,8 @@ let CreateProjectUseCase = (_dec = (0, _tsyringe.injectable)(), _dec2 = function
   async execute({
     category,
     image,
-    user_email
+    user_email,
+    isPrivate
   }) {
     const user = await this.userRepository.findByEmail(user_email);
 
@@ -46,7 +47,8 @@ let CreateProjectUseCase = (_dec = (0, _tsyringe.injectable)(), _dec2 = function
     await this.projectRepository.create({
       category,
       image,
-      user_email
+      user_email,
+      isPrivate
     });
   }
 

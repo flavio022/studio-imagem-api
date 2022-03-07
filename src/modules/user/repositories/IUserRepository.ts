@@ -15,7 +15,7 @@ interface ISetAdminDTO {
 
 interface IActiveUserDTO {
     email: string;
-    isActive: boolean;
+    isActiveted: boolean;
 }
 
 interface IUserRepository {
@@ -24,7 +24,7 @@ interface IUserRepository {
     list(): Promise<User[]>;
     create({ name, email, password }: ICreateUserDTO): Promise<void>;
     setAdmin({ email, isAdmin }: ISetAdminDTO): Promise<void>;
-    enableUser({ email, isActive }: IActiveUserDTO): Promise<void>;
+    enableUser({ email, isActiveted }: IActiveUserDTO): Promise<void>;
     delete(id: string): Promise<void>;
 }
 

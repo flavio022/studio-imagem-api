@@ -10,6 +10,7 @@ interface IRequest {
     image: string;
     user_email: string;
     isPrivate: boolean;
+    isAdmin: boolean;
 }
 @injectable()
 class CreateProjectUseCase {
@@ -22,8 +23,11 @@ class CreateProjectUseCase {
         private storageProvider: IStorageProvider
     ) { }
 
-    async execute({ category, image, user_email, isPrivate }: IRequest): Promise<void> {
+    async execute({ category, image, user_email, isPrivate, isAdmin }: IRequest): Promise<void> {
         const user = await this.userRepository.findByEmail(user_email);
+        if (!isAdmin) {
+            throw new AppError("User does not a admin!", 403);
+        }
         if (!user) {
             throw new AppError("User does not exist!", 401);
         }

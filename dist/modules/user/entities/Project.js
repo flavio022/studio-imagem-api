@@ -11,7 +11,7 @@ var _typeorm = require("typeorm");
 
 var _classTransformer = require("class-transformer");
 
-var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5;
+var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _dec17, _dec18, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6;
 
 function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
 
@@ -19,9 +19,9 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
 
 function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'proposal-class-properties is enabled and runs after the decorators transform.'); }
 
-let Project = (_dec = (0, _typeorm.Entity)("projects"), _dec2 = Reflect.metadata("design:type", Function), _dec3 = Reflect.metadata("design:paramtypes", []), _dec4 = (0, _typeorm.PrimaryColumn)(), _dec5 = Reflect.metadata("design:type", String), _dec6 = (0, _typeorm.Column)(), _dec7 = Reflect.metadata("design:type", String), _dec8 = (0, _typeorm.Column)(), _dec9 = Reflect.metadata("design:type", String), _dec10 = (0, _typeorm.Column)(), _dec11 = Reflect.metadata("design:type", String), _dec12 = (0, _typeorm.CreateDateColumn)(), _dec13 = Reflect.metadata("design:type", typeof Date === "undefined" ? Object : Date), _dec14 = (0, _classTransformer.Expose)({
+let Project = (_dec = (0, _typeorm.Entity)("projects"), _dec2 = Reflect.metadata("design:type", Function), _dec3 = Reflect.metadata("design:paramtypes", []), _dec4 = (0, _typeorm.PrimaryColumn)(), _dec5 = Reflect.metadata("design:type", String), _dec6 = (0, _typeorm.Column)(), _dec7 = Reflect.metadata("design:type", String), _dec8 = (0, _typeorm.Column)(), _dec9 = Reflect.metadata("design:type", String), _dec10 = (0, _typeorm.Column)(), _dec11 = Reflect.metadata("design:type", String), _dec12 = (0, _typeorm.Column)(), _dec13 = Reflect.metadata("design:type", Boolean), _dec14 = (0, _typeorm.CreateDateColumn)(), _dec15 = Reflect.metadata("design:type", typeof Date === "undefined" ? Object : Date), _dec16 = (0, _classTransformer.Expose)({
   name: "image_url"
-}), _dec15 = Reflect.metadata("design:type", Function), _dec16 = Reflect.metadata("design:paramtypes", []), _dec(_class = _dec2(_class = _dec3(_class = (_class2 = class Project {
+}), _dec17 = Reflect.metadata("design:type", Function), _dec18 = Reflect.metadata("design:paramtypes", []), _dec(_class = _dec2(_class = _dec3(_class = (_class2 = class Project {
   getImageUrl() {
     switch (process.env.disk) {
       case "local":
@@ -44,11 +44,15 @@ let Project = (_dec = (0, _typeorm.Entity)("projects"), _dec2 = Reflect.metadata
 
     _initializerDefineProperty(this, "user_email", _descriptor4, this);
 
-    _initializerDefineProperty(this, "created_at", _descriptor5, this);
+    _initializerDefineProperty(this, "isPrivate", _descriptor5, this);
+
+    _initializerDefineProperty(this, "created_at", _descriptor6, this);
 
     if (!this.id) {
       this.id = (0, _uuid.v4)();
     }
+
+    this.isPrivate = this.isPrivate;
   }
 
 }, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "id", [_dec4, _dec5], {
@@ -71,10 +75,15 @@ let Project = (_dec = (0, _typeorm.Entity)("projects"), _dec2 = Reflect.metadata
   enumerable: true,
   writable: true,
   initializer: null
-}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "created_at", [_dec12, _dec13], {
+}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "isPrivate", [_dec12, _dec13], {
   configurable: true,
   enumerable: true,
   writable: true,
   initializer: null
-}), _applyDecoratedDescriptor(_class2.prototype, "getImageUrl", [_dec14, _dec15, _dec16], Object.getOwnPropertyDescriptor(_class2.prototype, "getImageUrl"), _class2.prototype)), _class2)) || _class) || _class) || _class);
+}), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, "created_at", [_dec14, _dec15], {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  initializer: null
+}), _applyDecoratedDescriptor(_class2.prototype, "getImageUrl", [_dec16, _dec17, _dec18], Object.getOwnPropertyDescriptor(_class2.prototype, "getImageUrl"), _class2.prototype)), _class2)) || _class) || _class) || _class);
 exports.Project = Project;
