@@ -6,9 +6,7 @@ import { router } from './routes';
 import 'dotenv/config';
 import cors from 'cors';
 import * as Sentry from "@sentry/node";
-import { handlingErrors } from "./middlewares/handlingErrors";
-import swaggerFile from "./swagger.json";
-import swaggerUi from 'swagger-ui-express';
+import { handlingErrors } from "./middlewares/handlingErrors"
 
 
 const app = express();
@@ -17,8 +15,6 @@ app.use(Sentry.Handlers.tracingHandler());
 app.use(express.json());
 
 app.use(cors());
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
-
 app.use(router);
 app.use(Sentry.Handlers.errorHandler());
 
