@@ -67,16 +67,14 @@ class ProjectRepository implements IProjectRepository {
             project = await this.projectRepository.find({
                 where:
                 {
-                    user_email: user_email,
-                    isPrivate: true
+                    user_email: user_email
                 }
             });
         } else {
             project = await this.projectRepository.find({
                 where: {
                     user_email: user_email,
-                    category: category,
-                    isPrivate: true
+                    category: category
                 }
             })
         }
@@ -84,7 +82,6 @@ class ProjectRepository implements IProjectRepository {
     }
 
     async create({ category, image, user_email, isPrivate }: ICreateProjectDto): Promise<void> {
-        console.log("aquiiii")
 
         if (isPrivate == 'true' || isPrivate == true) {
             isPrivate = true;
