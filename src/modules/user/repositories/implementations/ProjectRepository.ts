@@ -2,6 +2,7 @@ import { AppError } from "../../../../errors/AppError";
 import { getRepository, Repository } from "typeorm";
 import { Project } from "../../entities/Project";
 import { ICreateProjectDto, IProjectRepository } from "../IProjectRepository";
+import { EventListenerTypes } from "typeorm/metadata/types/EventListenerTypes";
 
 class ProjectRepository implements IProjectRepository {
 
@@ -83,15 +84,24 @@ class ProjectRepository implements IProjectRepository {
     }
 
     async create({ category, image, user_email, isPrivate }: ICreateProjectDto): Promise<void> {
-        console.log(isPrivate)
+        console.log("aquiiii")
+
+        if (isPrivate == 'true' || isPrivate == true) {
+            isPrivate = true;
+        } else {
+            isPrivate = false;
+        }
+
+
         const specification = this.projectRepository.create(
             {
                 category,
                 image,
                 user_email,
-                isPrivate
+                isPrivate: isPrivate
             }
         )
+        console.log(specification)
         await this.projectRepository.save(specification);
     }
 
