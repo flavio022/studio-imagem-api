@@ -2,7 +2,6 @@ import { AppError } from "../../../../errors/AppError";
 import { getRepository, Repository } from "typeorm";
 import { Project } from "../../entities/Project";
 import { ICreateProjectDto, IProjectRepository } from "../IProjectRepository";
-import { EventListenerTypes } from "typeorm/metadata/types/EventListenerTypes";
 
 class ProjectRepository implements IProjectRepository {
 
@@ -20,65 +19,128 @@ class ProjectRepository implements IProjectRepository {
         await this.projectRepository.delete(id);
     }
 
-    async listAllProjects(category: string): Promise<Project[]> {
+    async listAllProjects(category: string,page: number,pageSize:number): Promise<Project[]> {
         var projects = null;
+        var count =0;
         if (category !== undefined) {
             console.log("private udnie")
 
-            projects = await this.projectRepository.find({
+            const[project,total] = await this.projectRepository.findAndCount({
                 where: {
                     category,
                     isPrivate: false
-                }
+                },
+                order:{
+                    created_at:'DESC'
+                },
+                skip: (page - 1) * pageSize,
+                take: pageSize,
             });
-        } else {
+            projects =project;
+            count = total;
+        }
+        else {
             console.log("private flase")
-            projects = await this.projectRepository.find({
+            const[project,total] = await this.projectRepository.findAndCount({
                 where: {
                     isPrivate: false
                 },
+                order:{
+                    created_at:'DESC'
+                },
+                skip: (page - 1) * pageSize,
+                take: pageSize,
             });
+            projects =project;
+            count = total;
         }
-        return projects;
+        return {
+            projects,
+            count,
+            page,
+            pageSize
+        }
     }
 
-    async listByUserEmail(user_email: string, category: string): Promise<Project[]> {
-        var project = null;
+    async listByUserEmail(user_email: string, category: string,page:number,pageSize:number): Promise<Project[]> {
+        var projects = null;
+        var count =0;
+
         if (category === undefined) {
-            project = await this.projectRepository.find({
+            const[project,total] = await this.projectRepository.findAndCount({
                 where:
                 {
                     user_email: user_email
-                }
+                },
+                order:{
+                    created_at:'DESC'
+                },
+                skip: (page - 1) * pageSize,
+                take: pageSize,
             });
+            projects =project;
+            count = total;
+                
         } else {
-            project = await this.projectRepository.find({
+            const[project,total] = await this.projectRepository.findAndCount({
                 where: {
                     user_email: user_email,
                     category: category
-                }
-            })
+                },
+                order:{
+                    created_at:'DESC'
+                },
+                skip: (page - 1) * pageSize,
+                take: pageSize,
+            });
+            projects =project;
+            count = total;
         }
-        return project;
+        return {
+            projects,
+            count,
+            page,
+            pageSize
+        }
     }
-    async listUserProjects(user_email: string, category: string): Promise<Project[]> {
-        var project = null;
+    async listUserProjects(user_email: string, category: string,page:number,pageSize:number): Promise<Project[]> {
+        var projects = null;
+        var count =0;
         if (category === undefined) {
-            project = await this.projectRepository.find({
+            const[project,total] = await this.projectRepository.findAndCount({
                 where:
                 {
                     user_email: user_email
-                }
+                },
+                order:{
+                    created_at:'DESC'
+                },
+                skip: (page - 1) * pageSize,
+                take: pageSize,
             });
+            projects =project;
+            count = total;
         } else {
-            project = await this.projectRepository.find({
+            const[project,total]  = await this.projectRepository.findAndCount({
                 where: {
                     user_email: user_email,
                     category: category
-                }
-            })
+                },
+                order:{
+                    created_at:'DESC'
+                },
+                skip: (page - 1) * pageSize,
+                take: pageSize,
+            });
+            projects =project;
+            count = total;
         }
-        return project;
+        return {
+            projects,
+            count,
+            page,
+            pageSize
+        }
     }
 
     async create({ category, image, user_email, isPrivate }: ICreateProjectDto): Promise<void> {

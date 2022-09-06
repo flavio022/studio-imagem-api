@@ -11,8 +11,8 @@ class ListProjectsUseCase {
 
     }
 
-    async execute(category): Promise<IProjectDto[]> {
-        const projects = await this.projectRepository.listAllProjects(category);
+    async execute(category,page,pageSize): Promise<IProjectDto[]> {
+        const projects = await this.projectRepository.listAllProjects(category,page,pageSize);
 
         return projects;
     }

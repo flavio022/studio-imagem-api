@@ -11,8 +11,8 @@ class ListProjectsByEmailUseCase {
 
     }
 
-    async execute({ email, category }): Promise<Project[]> {
-        const projects = await this.projectRepository.listByUserEmail(email, category);
+    async execute({ email, category,page,pageSize }): Promise<Project[]> {
+        const projects = await this.projectRepository.listByUserEmail(email, category,page,pageSize);
         if (!projects) {
             throw new AppError("User does not found!", 401);
         }

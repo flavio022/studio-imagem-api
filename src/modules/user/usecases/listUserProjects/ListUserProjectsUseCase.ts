@@ -11,8 +11,8 @@ class ListUserProjectsUseCase {
 
     }
 
-    async execute({ email, category }): Promise<Project[]> {
-        const projects = await this.projectRepository.listUserProjects(email, category);
+    async execute({ email, category,page,pageSize }): Promise<Project[]> {
+        const projects = await this.projectRepository.listUserProjects(email, category,page,pageSize);
 
         return projects;
     }
