@@ -24,4 +24,5 @@ projectRoutes.get("/", listProjectsController.handle);
 projectRoutes.get("/me", listUserProjectsController.handle);
 projectRoutes.get("/all", listProjectsByEmailController.handle);
 projectRoutes.delete("/:id", deleteProjectController.handle);
+
 export { projectRoutes }
