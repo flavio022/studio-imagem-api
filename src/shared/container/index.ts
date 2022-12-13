@@ -31,10 +31,5 @@ container.registerSingleton<IProjectRepository>(
 
 container.registerSingleton<IStorageProvider>(
     "StorageProvider",
-    S3StorageProvider
-)
-
-container.registerSingleton<IStorageProvider>(
-    "StorageProvider",
-    S3StorageProvider
+    LocalStorageProvider
 )

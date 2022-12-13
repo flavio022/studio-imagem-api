@@ -13,10 +13,11 @@ const createCategoryController = new CreateCategoryController();
 const listCategoryController = new ListCategoryController();
 const deleteCategoryController = new DeleteProjectController();
 
-categoryRoutes.use(ensureAuthetnticated);
 
 categoryRoutes.post("/", createCategoryController.handler);
 categoryRoutes.get("/", listCategoryController.handle);
 categoryRoutes.delete("/:id", deleteCategoryController.handle);
+categoryRoutes.use(ensureAuthetnticated);
+
 
 export { categoryRoutes }

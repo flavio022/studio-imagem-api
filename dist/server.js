@@ -32,5 +32,6 @@ app.use((0, _cors.default)());
 app.use(_routes.router);
 app.use(Sentry.Handlers.errorHandler());
 app.use(_handlingErrors.handlingErrors);
-const port = process.env.PORT || 3333;
-app.listen(port, () => console.log("Server is running!", port));
+app.listen(process.env.PORT || 3000, function(){
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  });
