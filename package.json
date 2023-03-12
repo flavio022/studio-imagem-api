@@ -7,7 +7,7 @@
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files ",
     "dev": "ts-node-dev --inspect --transpile-only src/server.ts --ignore-watch node_modules --respawn src/server.ts",
     "start": "node ./dist/server.js",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli"
+    "typeorm": "ts-node ./node_modules/typeorm/cli"
   },
   "author": "",
   "license": "ISC",
@@ -28,6 +28,7 @@
     "nodemon": "^2.0.12",
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
+    "ts-node": "^10.9.1",
     "tsyringe": "^4.6.0",
     "typeorm": "^0.2.38",
     "uuid": "^8.3.2",
