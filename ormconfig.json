@@ -1,6 +1,6 @@
 {
     "type": "postgres",
-    "url": "postgres://xtauquohetpeca:f39b344a058861ee727fc14d2ce71e29b526547a64c9925cce0c0310ddafe0ee@ec2-3-227-154-49.compute-1.amazonaws.com:5432/dd3kjktgjknm1n",
+    "url": "postgres://qpvhduezfozuvh:5d825e95cdd3c7c4cf0007b503f406d45225a29972fdd7c73224e0d72e9f9459@ec2-34-226-11-94.compute-1.amazonaws.com:5432/d35nmrlcik0jlc",
     "migrations": [
         "./dist/database/migrations/*.js"
     ],
