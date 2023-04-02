@@ -1,4 +1,4 @@
-import { v4 as uuidV4 } from "uuid";
+const { uuid } = require('uuidv4');
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 import { Expose } from 'class-transformer';
 
@@ -37,7 +37,7 @@ class Project {
 
     constructor() {
         if (!this.id) {
-            this.id = uuidV4();
+            this.id = uuid();
         }
         this.isPrivate = this.isPrivate;
     }
