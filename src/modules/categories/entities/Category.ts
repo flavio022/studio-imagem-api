@@ -1,4 +1,4 @@
-import { v4 as uuidV4 } from "uuid";
+const { uuid } = require('uuidv4');
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 
 @Entity("categories")
@@ -15,7 +15,7 @@ class Category {
 
     constructor() {
         if (!this.id) {
-            this.id = uuidV4();
+            this.id = uuid();
         }
     }
 }

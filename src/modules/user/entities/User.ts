@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
-import { v4 as uuidV4 } from "uuid";
+const { uuid } = require('uuidv4');
 
 @Entity("users")
 class User {
@@ -35,7 +35,7 @@ class User {
 
     constructor() {
         if (!this.id) {
-            this.id = uuidV4();
+            this.id = uuid();
         }
     }
 }
