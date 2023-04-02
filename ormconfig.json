@@ -1,6 +1,6 @@
 {
     "type": "postgres",
-    "url": "postgres://cxspgrfrwfcfsc:7f4462f584cbba7ac8ed29d59ecf04c0c6713fa8c6986f480f327ad4820586d3@ec2-3-209-124-113.compute-1.amazonaws.com:5432/d2589jv81mhbf8",
+    "url": "postgres://kohxsdhz:glu4P7asTFpePuGIOaWEutr_9WKsTkqS@rosie.db.elephantsql.com/kohxsdhz",
     "migrations": [
         "./dist/database/migrations/*.js"
     ],
